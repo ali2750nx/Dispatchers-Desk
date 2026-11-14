@@ -117,6 +117,10 @@ tbody tr:hover{background:#eaf5f3}
 #login{flex-direction:column;gap:18px;background:radial-gradient(circle at 12% 18%,rgba(15,118,110,.18),transparent 40%),radial-gradient(circle at 88% 12%,rgba(245,158,11,.2),transparent 35%),linear-gradient(160deg,#f2f7f6,#fff 60%,#e8f3f1)}
 .ltag{text-align:center;max-width:460px;animation:up .5s ease backwards}.ltag h2{margin:0;font-size:1.7rem;letter-spacing:-.02em;color:var(--bd)}.ltag .cap{margin:6px 0 0;color:var(--mu);min-height:1.5em}
 @media(max-width:860px){.hero{padding:60px 18px 18px}}
+.hero #so{position:absolute;top:16px;right:16px;z-index:2;display:inline-flex;align-items:center;gap:7px;padding:7px 14px 7px 12px;font-size:.85rem;border:1px solid rgba(255,255,255,.4);border-radius:20px;background:rgba(255,255,255,.16);color:#fff;box-shadow:none;backdrop-filter:blur(4px)}
+.hero #so:hover{background:#fff;color:var(--bd);transform:translateY(-1px);box-shadow:0 6px 14px rgba(0,0,0,.18)}
+.hero #so svg{transition:transform .2s}.hero #so:hover svg{transform:translateX(3px)}
+@media(max-width:860px){.hero #so{top:12px;right:12px}}
 </style></head><body class="locked">
 <div id="login"><div class="ltag"><h2>Move freight with confidence.</h2><p class="cap"></p></div><form class="lbox" id="lF" autocomplete="on">
 <div class="lg"><svg viewBox="0 0 48 48" width="42" height="42" aria-hidden="true"><rect width="48" height="48" rx="11" fill="#0f766e"/><path d="M15 12h10a12 12 0 0 1 0 24H15z" fill="#fff"/><path d="M21 18h4a6 6 0 0 1 0 12h-4z" fill="#0f766e"/><path d="M8 41h32" stroke="#f59e0b" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 5"/></svg><div><b>Dispatchers</b><span>Desk</span></div></div>
@@ -131,9 +135,8 @@ tbody tr:hover{background:#eaf5f3}
 <button class="on" data-v="lookup">Carrier lookup</button><button data-v="find">Find carriers</button><button data-v="truck">Search by truck type</button><button data-v="newa">New authorities</button><button data-v="bulk">Bulk verify</button><button data-v="health">Data check</button>
 <div class="srv" id="srv">Checking server…</div></aside>
 <main>
-<button id="so" type="button">Sign out</button>
 <div class="road" id="appRoad"></div>
-<div class="hero"><div><small>THE DISPATCHER'S TOOLKIT</small><h2>Dispatch smarter. Vet every carrier.</h2><p class="cap"></p></div><div class="chips"><span>MC &amp; USDOT verify</span><span>Equipment search</span><span>Bulk checks</span></div></div>
+<div class="hero"><button id="so" type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>Sign out</button><div><small>THE DISPATCHER'S TOOLKIT</small><h2>Dispatch smarter. Vet every carrier.</h2><p class="cap"></p></div><div class="chips"><span>MC &amp; USDOT verify</span><span>Equipment search</span><span>Bulk checks</span></div></div>
 <section class="view on" id="v-lookup"><h1>Verify a carrier</h1><p class="sub">Search by MC number, USDOT number or company name. Active and inactive carriers are included.</p>
 <form class="bar" id="lkF"><select id="lkM"><option value="mc">MC number</option><option value="dot">USDOT number</option><option value="name">Company name</option></select><input id="lkQ" required placeholder="e.g. 123456" autocomplete="off" aria-label="Search term"><button>Verify</button></form>
 <div id="lk"></div></section>
