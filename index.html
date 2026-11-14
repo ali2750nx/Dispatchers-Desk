@@ -59,11 +59,81 @@ main{display:flex;flex-direction:column}.view{padding-bottom:48px}.ft{margin:aut
 @media(max-width:860px){body{grid-template-columns:1fr}aside{position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center}.lg{padding:0 10px 0 0}.srv{display:none}main{padding:20px 16px}.ft{margin:auto -16px -20px;padding:16px}.kpis{grid-template-columns:1fr 1fr}.cols{grid-template-columns:1fr}}
 @media print{aside,.acts,.bar{display:none}body{display:block}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
-</style></head><body>
+
+body.locked{display:block}body.locked aside,body.locked main{display:none}
+#login{display:none}body.locked #login{display:flex}
+#login{position:fixed;inset:0;z-index:100;align-items:center;justify-content:center;padding:20px;background:linear-gradient(160deg,var(--so),#fff 55%,#e8f3f1)}
+.lbox{width:100%;max-width:380px;background:#fff;border:1px solid var(--ln);border-top:4px solid var(--lt);padding:28px 26px;animation:up .4s ease backwards;box-shadow:0 10px 30px rgba(16,32,31,.08)}
+.lbox .lg{padding:0 0 14px}.lbox h1{font-size:1.35rem}.lbox label{display:block;font-size:.8rem;color:var(--mu);margin-top:12px}
+.lbox input[type=text],.lbox input[type=password]{width:100%;font:inherit;padding:10px;border:2px solid var(--ink);background:#fff;margin-top:3px}
+.lbox .ck2{display:flex;align-items:center;gap:6px;color:var(--ink);font-size:.9rem}.lbox .btn{width:100%;margin-top:16px;padding:11px}
+#lErr{display:none;margin:12px 0 0}#lErr.on{display:block}
+#so{position:fixed;top:14px;right:18px;z-index:50;font:inherit;font-weight:700;padding:7px 14px;border:2px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer;transition:background .2s,color .2s}
+#so:hover{background:var(--ink);color:#fff}
+@media(max-width:860px){#so{top:8px;right:10px;padding:5px 10px;font-size:.85rem}}
+
+/* ---- button motion ---- */
+.btn,.bar button{position:relative;overflow:hidden}#so{overflow:hidden}
+.btn.p::after,.bar button::after{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.4),transparent);transform:skewX(-20deg);transition:left .6s ease;pointer-events:none}
+.btn.p:hover::after,.bar button:hover::after{left:130%}
+.btn:active:not(:disabled),.bar button:active,#so:active{transform:scale(.96)}
+aside button:hover{transform:translateX(5px)}aside button:active{transform:translateX(5px) scale(.97)}
+#so{box-shadow:0 2px 0 rgba(16,32,31,.12)}#so:hover{transform:translateY(-1px);box-shadow:0 6px 14px rgba(16,32,31,.18)}
+#lB:not(:disabled){animation:ring 2.6s ease-out infinite}
+#lB:disabled::before{content:"";display:inline-block;width:12px;height:12px;margin-right:8px;vertical-align:-2px;border:2px solid rgba(255,255,255,.5);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite}
+.lbox.shake{animation:shake .45s ease}
+.lbox input:focus{border-color:var(--bl);box-shadow:0 0 0 3px rgba(15,118,110,.18);outline:0;transition:box-shadow .2s,border-color .2s}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(15,118,110,.45)}70%,100%{box-shadow:0 0 0 12px rgba(15,118,110,0)}}
+@keyframes shake{0%,100%{transform:none}20%{transform:translateX(-9px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(3px)}}
+/* ---- moving trucks ---- */
+.road{position:relative;height:48px;overflow:hidden;pointer-events:none;background:#fff;border-top:1px solid var(--ln)}
+.road::after{content:"";position:absolute;left:0;right:0;bottom:8px;height:3px;background:linear-gradient(90deg,var(--lt) 18px,transparent 18px) 0 0/38px 3px repeat-x;animation:rd .8s linear infinite;opacity:.8}
+.trk{position:absolute;left:0;bottom:12px;width:84px;height:36px;animation:drive var(--d,16s) linear var(--l,0s) infinite;will-change:transform}
+.trk svg{display:block;animation:bob .4s ease-in-out infinite alternate}
+.trk .w{transform-box:fill-box;transform-origin:center;animation:sp .5s linear infinite}
+#appRoad{position:fixed;bottom:0;left:220px;right:0;z-index:5}
+main{padding-bottom:110px}
+#login .road{position:absolute;left:0;right:0;bottom:0;height:64px;background:rgba(255,255,255,.65)}
+#login .trk{bottom:16px}
+@keyframes drive{from{transform:translateX(-120px)}to{transform:translateX(calc(100vw + 40px))}}
+@keyframes bob{to{transform:translateY(-1.5px)}}
+@keyframes rd{to{background-position:-38px 0}}
+@media(max-width:860px){#appRoad{left:0}}
+@media(prefers-reduced-motion:reduce){.trk,.trk svg,.trk .w,.road::after,#lB{animation:none!important}.trk{transform:translateX(30vw)}}
+
+/* ---- look & captions ---- */
+main{background:#f7fbfa}
+.hero{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin:0 0 24px;padding:22px 150px 22px 26px;color:#fff;border-radius:6px;position:relative;overflow:hidden;background:linear-gradient(120deg,#0b4f4a,#0f766e 60%,#13897f);box-shadow:0 8px 24px rgba(11,79,74,.22)}
+.hero::after{content:"";position:absolute;right:-40px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,.5),transparent 70%)}
+.hero small{font-weight:800;letter-spacing:.12em;font-size:.7rem;color:#fcd98a}.hero h2{margin:4px 0 6px;font-size:1.45rem;letter-spacing:-.01em;color:#fff}
+.hero .cap{margin:0;min-height:1.5em;opacity:.95}.chips{display:flex;gap:8px;flex-wrap:wrap;position:relative;z-index:1}
+.chips span{font-size:.78rem;font-weight:700;padding:5px 12px;border-radius:20px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3)}
+.cap{transition:opacity .4s,transform .4s}.cap.out{opacity:0;transform:translateY(6px)}
+.side-cap{margin:-6px 6px 10px;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mu)}
+.view h1::after{content:"";display:block;width:46px;height:4px;margin-top:6px;border-radius:3px;background:var(--lt)}
+.kpi,.head,.tw,dl,.chk{background:#fff;box-shadow:0 2px 10px rgba(16,32,31,.05)}
+.kpi,.head{transition:transform .2s,box-shadow .2s}.kpi:hover,.head:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(16,32,31,.1)}
+tbody tr:hover{background:#eaf5f3}
+#login{flex-direction:column;gap:18px;background:radial-gradient(circle at 12% 18%,rgba(15,118,110,.18),transparent 40%),radial-gradient(circle at 88% 12%,rgba(245,158,11,.2),transparent 35%),linear-gradient(160deg,#f2f7f6,#fff 60%,#e8f3f1)}
+.ltag{text-align:center;max-width:460px;animation:up .5s ease backwards}.ltag h2{margin:0;font-size:1.7rem;letter-spacing:-.02em;color:var(--bd)}.ltag .cap{margin:6px 0 0;color:var(--mu);min-height:1.5em}
+@media(max-width:860px){.hero{padding:60px 18px 18px}}
+</style></head><body class="locked">
+<div id="login"><div class="ltag"><h2>Move freight with confidence.</h2><p class="cap"></p></div><form class="lbox" id="lF" autocomplete="on">
+<div class="lg"><svg viewBox="0 0 48 48" width="42" height="42" aria-hidden="true"><rect width="48" height="48" rx="11" fill="#0f766e"/><path d="M15 12h10a12 12 0 0 1 0 24H15z" fill="#fff"/><path d="M21 18h4a6 6 0 0 1 0 12h-4z" fill="#0f766e"/><path d="M8 41h32" stroke="#f59e0b" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 5"/></svg><div><b>Dispatchers</b><span>Desk</span></div></div>
+<h1>Sign in</h1><p class="sub" style="margin:0">Enter your username and password to continue.</p>
+<label for="lU">Username<input type="text" id="lU" name="username" required autocomplete="username" autocapitalize="none" spellcheck="false"></label>
+<label for="lP">Password<input type="password" id="lP" name="password" required autocomplete="current-password"></label>
+<label class="ck2"><input type="checkbox" id="lR"> Keep me signed in on this device</label>
+<div class="msg err" id="lErr" role="alert"></div>
+<button class="btn p" id="lB">Sign in</button></form><div class="road"></div></div>
 <aside><div class="lg"><svg viewBox="0 0 48 48" width="42" height="42" aria-hidden="true"><rect width="48" height="48" rx="11" fill="#0f766e"/><path d="M15 12h10a12 12 0 0 1 0 24H15z" fill="#fff"/><path d="M21 18h4a6 6 0 0 1 0 12h-4z" fill="#0f766e"/><path class="dash" d="M8 41h32" stroke="#f59e0b" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 5"/></svg><div><b>Dispatchers</b><span>Desk</span></div></div>
+<p class="side-cap">Professional dispatch toolkit</p>
 <button class="on" data-v="lookup">Carrier lookup</button><button data-v="find">Find carriers</button><button data-v="truck">Search by truck type</button><button data-v="newa">New authorities</button><button data-v="bulk">Bulk verify</button><button data-v="health">Data check</button>
 <div class="srv" id="srv">Checking server…</div></aside>
 <main>
+<button id="so" type="button">Sign out</button>
+<div class="road" id="appRoad"></div>
+<div class="hero"><div><small>THE DISPATCHER'S TOOLKIT</small><h2>Dispatch smarter. Vet every carrier.</h2><p class="cap"></p></div><div class="chips"><span>MC &amp; USDOT verify</span><span>Equipment search</span><span>Bulk checks</span></div></div>
 <section class="view on" id="v-lookup"><h1>Verify a carrier</h1><p class="sub">Search by MC number, USDOT number or company name. Active and inactive carriers are included.</p>
 <form class="bar" id="lkF"><select id="lkM"><option value="mc">MC number</option><option value="dot">USDOT number</option><option value="name">Company name</option></select><input id="lkQ" required placeholder="e.g. 123456" autocomplete="off" aria-label="Search term"><button>Verify</button></form>
 <div id="lk"></div></section>
@@ -108,6 +178,36 @@ main{display:flex;flex-direction:column}.view{padding-bottom:48px}.ft{margin:aut
 <div class="acts"><button class="btn p" id="hGo">Run connection test</button><button class="btn" id="hClr">Clear saved results</button></div><div id="hOut"></div></section>
 <footer class="ft">Developed by Ali Shafique &middot; &copy; 2026 All rights reserved.</footer>
 </main>
+<script>
+/* ---- trucks driving along the road strips ---- */
+(()=>{const wh=x=>`<g class="w"><circle cx="${x}" cy="31" r="5" fill="#10201f"/><circle cx="${x}" cy="31" r="1.8" fill="#cfd8d6"/><path d="M${x} 27.5V31" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></g>`;
+const truck=(a,c,d,l)=>`<div class="trk" style="--d:${d}s;--l:${l}s"><svg viewBox="0 0 84 36" width="84" height="36" aria-hidden="true"><rect x="2" y="3" width="52" height="24" rx="2.5" fill="${a}"/><rect x="2" y="13" width="52" height="3" fill="#fff" opacity=".55"/><path d="M57 9h12l9 9v9H57z" fill="${c}"/><path d="M62 12h6l5 6H62z" fill="#cfe9e6"/><rect x="2" y="27" width="76" height="3" fill="#10201f"/><rect x="77" y="20" width="2.5" height="3.5" fill="#f59e0b"/>${wh(13)}${wh(23)}${wh(66)}</svg></div>`;
+const html=truck("#0f766e","#0b4f4a",17,-2)+truck("#f59e0b","#b45309",24,-11)+truck("#475569","#1e293b",20,-16);
+document.querySelectorAll(".road").forEach(r=>r.innerHTML=html);
+const caps=["Verify authority before you book.","Great dispatchers protect margins, not just miles.","Right truck. Right load. Right time.","Check insurance and authority in seconds.","Reliable carriers build reliable lanes.","Be the dispatcher carriers trust."];let ci=0;
+const setCap=()=>document.querySelectorAll(".cap").forEach(c=>{c.classList.add("out");setTimeout(()=>{c.textContent=caps[ci];c.classList.remove("out")},400)});
+document.querySelectorAll(".cap").forEach(c=>c.textContent=caps[0]);setInterval(()=>{ci=(ci+1)%caps.length;setCap()},4500);})();
+</script>
+<script>
+/* ---- Login gate: users come from users.json ---- */
+(()=>{
+const K="dd_session",b=document.body,e=i=>document.getElementById(i);
+const get=()=>{try{return JSON.parse(sessionStorage[K]||localStorage[K]||"null")}catch(x){return null}};
+const ok=u=>{b.classList.remove("locked")};
+const s0=get();if(s0&&s0.exp>Date.now())ok(s0);
+e("so").onclick=()=>{sessionStorage.removeItem(K);localStorage.removeItem(K);location.reload()};
+e("lF").onsubmit=async ev=>{ev.preventDefault();const er=e("lErr"),btn=e("lB");er.classList.remove("on");btn.disabled=true;
+ try{
+  const r=await fetch("users.json",{cache:"no-store"});if(!r.ok)throw new Error("Could not load users.json ("+r.status+").");
+  const list=(await r.json()).users||[],name=e("lU").value.trim().toLowerCase(),pw=e("lP").value;
+  const u=list.find(x=>String(x.username).toLowerCase()===name&&String(x.password)===pw);
+  await new Promise(z=>setTimeout(z,500));
+  if(!u){er.textContent="Wrong username or password.";er.classList.add("on");{const lb=document.querySelector(".lbox");lb.classList.remove("shake");void lb.offsetWidth;lb.classList.add("shake")}e("lP").value="";e("lP").focus();return}
+  const keep=e("lR").checked,ses={user:u.username,name:u.name||u.username,exp:Date.now()+(keep?30:1)*864e5};
+  (keep?localStorage:sessionStorage)[K]=JSON.stringify(ses);e("lP").value="";ok(ses);
+ }catch(x){er.textContent=x.message;er.classList.add("on")}finally{btn.disabled=false}};
+})();
+</script>
 <script>
 const $=i=>document.getElementById(i),D="https://data.transportation.gov/",DS={census:"az4n-8mr2",motus:"inys-ebih",legacy:"6eyk-hxee",auth:"yu5v-wbh6"};
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])),dg=s=>String(s).replace(/\D/g,""),sq=s=>String(s).replace(/'/g,"''").replace(/%/g,"");
