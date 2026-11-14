@@ -41,8 +41,12 @@ http.createServer(async (req, res) => {
       res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
       return res.end(fs.readFileSync(path.join(__dirname, "index.html")));
     }
+    if (url.pathname === "/users.json") {
+      res.writeHead(200, { "Content-Type": "application/json" });
+      return res.end(fs.readFileSync(path.join(__dirname, "users.json")));
+    }
     send(res, 404, { error: "not found" });
   } catch (e) {
     send(res, e.status || 500, { error: e.message });
   }
-}).listen(PORT, () => console.log(`Dispatchers Desk running at http://localhost:${PORT}  (webKey ${KEY ? "loaded" : "MISSING"})`));
+}).listen(PORT, () => console.log(`Dispatchers Desk running at http://localhost:${PORT}  (webKey ${KEY ? "loaded" : "MISSING"})`));a
