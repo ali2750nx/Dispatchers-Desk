@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "username": "ali",
+      "name": "Ali Shafique",
+      "password": "ChangeMe123"
+    },
+    {
+      "username": "demo",
+      "name": "Demo User",
+      "password": "demo123"
+    },
+    {
+      "username": "noahcarter",
+      "name": "Noah Carter",
+      "password": "12345678"
+    }
+  ]
+}
